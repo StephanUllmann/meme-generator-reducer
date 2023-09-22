@@ -36,21 +36,21 @@ const initialState = {
   colorBottom: defaultVals.color,
 };
 
+const getRandom = (num) => Math.floor(Math.random() * num);
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'memes/memesLoaded': {
-      const randomIndex = Math.floor(Math.random() * action.payload.length);
       return {
         ...state,
         memeArr: action.payload,
-        randomMeme: randomIndex,
+        randomMeme: getRandom(action.payload.length),
       };
     }
     case 'memes/randomSelected': {
-      const randomIndex = Math.floor(Math.random() * state.memeArr.length);
       return {
         ...state,
-        randomMeme: randomIndex,
+        randomMeme: getRandom(state.memeArr.length),
         randomizeMeme: false,
       };
     }
@@ -62,22 +62,20 @@ const reducer = (state, action) => {
       };
     }
     case 'memes/randomized': {
-      const randomIndex = Math.floor(Math.random() * state.memeArr.length);
       const memes = state.memeArr;
       return {
         ...initialState,
         memeArr: memes,
-        randomMeme: randomIndex,
+        randomMeme: getRandom(state.memeArr.length),
       };
     }
     case 'file/inputted': {
       const memes = state.memeArr;
       if (!action.payload) {
-        const randomIndex = Math.floor(Math.random() * state.memeArr.length);
         return {
           ...initialState,
           memeArr: memes,
-          randomMeme: randomIndex,
+          randomMeme: getRandom(state.memeArr.length),
         };
       }
       const newImgURL = URL.createObjectURL(action.payload);
