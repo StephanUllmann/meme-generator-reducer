@@ -1,0 +1,10 @@
+.Meme {
+  width: 50rem;
+  height: 50rem;
+}
+
+.Meme__img {
+  /* height: 100%; */
+  width: 100%;
+  box-shadow: 2px 2px 2px #222;
+}
